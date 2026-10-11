@@ -7,6 +7,11 @@
 <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
 <link rel="icon" type="image/png" sizes="192x192" href="favicon-192.png">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="GNS">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="theme-color" content="#8e1c13">
 <title>GNS | America’s Number One Source for News</title>
 <meta property="og:title" content="GNS | America’s Number One Source for News">
@@ -190,6 +195,7 @@
 
   footer { background: var(--brand); color: #fff; }
   footer .wrap { padding: 22px 20px; font-size: 14px; display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+  footer .get-app { background: none; border: 0; padding: 0; color: inherit; font: inherit; font-weight: 600; text-decoration: underline; text-underline-offset: 3px; cursor: pointer; }
 </style>
 </head>
 <body>
@@ -225,6 +231,7 @@
 <footer>
   <div class="wrap">
     <a href="#/"><strong>GNS</strong></a>
+    <button type="button" class="get-app" data-install-app>Get the GNS app</button>
     <span>&copy; 2026 GNS. All rights reserved.</span>
   </div>
 </footer>
@@ -778,5 +785,6 @@ input.addEventListener("input", () => {
 window.addEventListener("hashchange", render);
 render();
 </script>
+<script src="install.js" data-name="GNS" data-icon="apple-touch-icon.png" data-accent="#8e1c13" data-theme="auto" data-tagline="Breaking news on your Home Screen" defer></script>
 </body>
 </html>
