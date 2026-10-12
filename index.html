@@ -272,6 +272,8 @@ const SECTIONS = [
 const ARTICLES = [
   {
     "slug": "the-fed-drops-rates-by-1-25-percent",
+    "image": "9k.png",
+    "imageAlt": "Sarah McMurry/GNS",
     "title": "THE FED DROPS RATES BY 1.25%",
     "dek": "Waning markets force harsh interest rate cut, White House attempts to compensate",
     "sections": [
@@ -298,6 +300,8 @@ const ARTICLES = [
   },
   {
     "slug": "the-republicans-are-coming-back-these-midterms",
+    "image": "image.png",
+    "imageAlt": "Rick Singer addressing the nation on behalf of the Republican National Committee. Rick Singer/GNS News",
     "title": "THE REPUBLICANS ARE COMING BACK THESE MIDTERMS.",
     "dek": "These midterms are different. The Republican Party is making their presence known this election cycle.",
     "sections": [
@@ -815,13 +819,13 @@ const block = b => typeof b === "string" ? `<p>${esc(b)}</p>`
   : b.list ? `<ul>${b.list.map(i => `<li>${esc(i)}</li>`).join("")}</ul>`
   : b.quote ? `<blockquote>${b.quote.map(q => `<p>${esc(q)}</p>`).join("")}</blockquote>`
   : b.img && IMAGES[b.img] ? `<figure class="inline-photo"><img src="${IMAGES[b.img]}" alt="${esc(b.alt || "")}"></figure>` : "";
-const img = (a, cls) => a.image && IMAGES[a.image]
-  ? `<div class="${cls}"><img src="${IMAGES[a.image]}" alt="${esc(a.imageAlt || "")}"></div>` : "";
+const img = (a, cls) => a.image && (IMAGES[a.image] || /\.(?:png|jpe?g|webp|gif)$/i.test(a.image))
+  ? `<div class="${cls}"><img src="${IMAGES[a.image] || a.image}" alt="${esc(a.imageAlt || "")}"></div>` : "";
 
 const isToon = a => a.sections.includes("cartoons");
 const caption = a => a.body.map(blockText).join(" ");
 function toonCard(a) {
-  return `<a class="toon-card" href="${link(a)}">${a.image && IMAGES[a.image] ? `<div class="frame"><img src="${IMAGES[a.image]}" alt="${esc(a.imageAlt || a.title)}"></div>` : ""}
+  return `<a class="toon-card" href="${link(a)}">${a.image && (IMAGES[a.image] || /\.(?:png|jpe?g|webp|gif)$/i.test(a.image)) ? `<div class="frame"><img src="${IMAGES[a.image] || a.image}" alt="${esc(a.imageAlt || a.title)}"></div>` : ""}
     <h4>${esc(a.title)}</h4>${caption(a) ? `<p>${esc(caption(a))}</p>` : ""}</a>`;
 }
 
@@ -884,7 +888,7 @@ function viewArticle(slug) {
   document.title = a.title + " | GNS";
   if (isToon(a)) return `<article class="article">
     <h1>${esc(a.title)}</h1>
-    ${a.image && IMAGES[a.image] ? `<figure class="toon-full"><img src="${IMAGES[a.image]}" alt="${esc(a.imageAlt || a.title)}"></figure>` : ""}
+    ${a.image && (IMAGES[a.image] || /\.(?:png|jpe?g|webp|gif)$/i.test(a.image)) ? `<figure class="toon-full"><img src="${IMAGES[a.image] || a.image}" alt="${esc(a.imageAlt || a.title)}"></figure>` : ""}
     ${caption(a) ? `<p class="toon-caption">${esc(caption(a))}</p>` : ""}
     <div class="meta">
       <div><p>Cartoon by ${esc(a.author)}${a.role ? ", " + esc(a.role) : ""}</p><p>Published on ${esc(a.published)}</p></div>
